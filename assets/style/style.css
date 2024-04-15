@@ -1,3 +1,29 @@
-* {
-  color: red;
+:root {
+  /* Typography */
+  --light-bg-color: #efefee;
+  --white-bg-color: #fff;
+  --dark-bg-color: #131834;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.signInContainer {
+  background-color: var(--light-bg-color);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.column {
+  background-color: var(--white-bg-color);
+  min-height: 300px;
+  max-height: 100%;
+  width: 450px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
 }
