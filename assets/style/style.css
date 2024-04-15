@@ -6,6 +6,8 @@
   --border-color: #dedede;
   --btn-bg-color: #4285f4;
   --white-text-color: #fff;
+  --std-black-text-color: #000;
+  --secondary-black-text-color: #333;
 }
 
 html,
@@ -13,6 +15,11 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+}
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--secondary-black-text-color);
 }
 
 .signInContainer {
@@ -29,6 +36,7 @@ body {
   max-height: 100%;
   width: 450px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
+  padding: 20px 35px;
 }
 
 .column form {
@@ -56,4 +64,21 @@ body {
   margin-top: 10px;
   margin-bottom: 20px;
   font-size: 16px;
+}
+
+.column .header {
+  padding: 20px 0;
+}
+
+.column h1 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  margin: 0;
+  padding-top: 16px;
+  color: var(--std-black-text-color);
+}
+
+.column .header span {
+  font-size: 14px;
 }

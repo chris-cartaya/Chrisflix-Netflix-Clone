@@ -16,8 +16,10 @@
     <div class="signInContainer">
         <div class="column">
 
-            Sign Up
-            to continue to VideoTube
+            <div class="header">
+                <h1>Sign Up</h1>
+                <span>to continue to Chrisflix</span>
+            </div>
         
             <form action="" method="POST">
                 <!-- add required to all inputs later -->
