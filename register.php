@@ -17,6 +17,7 @@
         <div class="column">
 
             <div class="header">
+                <img src="assets/images/chrisflix-logo.png" alt="Chrisflix logo" title="Logo">
                 <h1>Sign Up</h1>
                 <span>to continue to Chrisflix</span>
             </div>
