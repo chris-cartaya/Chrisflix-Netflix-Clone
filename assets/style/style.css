@@ -8,6 +8,7 @@
   --white-text-color: #fff;
   --std-black-text-color: #000;
   --secondary-black-text-color: #333;
+  --error-text-color: #f00;
 }
 
 html,
@@ -94,4 +95,11 @@ body {
   font-size: 14px;
   font-weight: 400;
   text-decoration: none;
+}
+
+.errorMessage {
+  color: var(--error-text-color);
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
 }
