@@ -1,7 +1,27 @@
 <?php
-    if (isset($_POST["submitButton"])) {
-        echo "Form was submitted<br>";
+require_once("includes/config.php");
+require_once("includes/classes/Account.php");
+require_once("includes/classes/Constants.php");
+require_once("includes/classes/FormSanitizer.php");
+
+$account = new Account($con);
+
+if (isset($_POST["submitButton"])) {
+    echo "Form was submitted<br>";
+
+    $username = FormSanitizer::sanitizeFormUsername($_POST['username']);
+    $password = FormSanitizer::sanitizeFormPassword($_POST['password']);
+    
+    echo "username: ";  var_dump($username);    echo "<br>";
+    echo "password: ";  var_dump($password);    echo "<br>";
+
+    $success = $account->login($username, $password);
+    
+    if ($success) {
+        // Store session variables --- do later.
+        header("Location: index.php");
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +44,13 @@
         
             <form action="" method="POST">
                 <!-- add required to all inputs later -->
-                <input type="text" name="userName" placeholder="Username">
+                <?= $account->getError(Constants::$loginFailed); ?>
 
-                <input type="password" name="password" placeholder="Password">
+                <input type="text" name="username" 
+                       placeholder="Username" required>
+
+                <input type="password" name="password" 
+                       placeholder="Password" required>
 
                 <input type="submit" name="submitButton" value="SUBMIT">
 

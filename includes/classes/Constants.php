@@ -28,11 +28,15 @@ class Constants {
     public static $emailTaken = "Email already in use";
     
     public static $passwordsDoNotMatch = "Passwords do not match";
-
+    
     public static $passwordLength = "Your password must be between " . 
         self::PASSWORD_MIN_CHARS . " and " . 
         self::PASSWORD_MAX_CHARS . " characters";
     
+    public static $loginFailed = "Your username or password was incorrect";
+
+    
+        
    
 }
 ?>

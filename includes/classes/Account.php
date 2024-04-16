@@ -33,6 +33,28 @@ class Account {
         return false;
     }
 
+    public function login($username, $password) {
+        $password = hash("sha512", $password);
+
+        $sql = "SELECT *
+                FROM users
+                WHERE username = :username AND password = :password";
+        
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 1) {
+            return true;
+        }
+
+        array_push($this->errorArr, Constants::$loginFailed);
+        return false;
+    }
+
     private function insertUserDetails($firstName, $lastName, $username, 
                                        $email, $password) {
         $password = hash("sha512", $password);
