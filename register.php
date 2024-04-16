@@ -4,8 +4,22 @@ require_once("includes/classes/FormSanitizer.php");
 
 if (isset($_POST["submitButton"])) {
     echo "Form was submitted<br>";
+
     $firstName = FormSanitizer::sanitizeFormString($_POST['firstName']);
-    var_dump($firstName);
+    $lastName = FormSanitizer::sanitizeFormString($_POST['lastName']);
+    $username = FormSanitizer::sanitizeFormUsername($_POST['username']);
+    $email = FormSanitizer::sanitizeFormEmail($_POST['email']);
+    $email2 = FormSanitizer::sanitizeFormEmail($_POST['email2']);
+    $password = FormSanitizer::sanitizeFormPassword($_POST['password']);
+    $password2 = FormSanitizer::sanitizeFormPassword($_POST['password2']);
+    
+    echo("firstName: {$firstName}<br>");
+    echo("lastName: {$lastName}<br>");
+    echo("username: {$username}<br>");
+    echo("email: {$email}<br>");
+    echo("email2: {$email2}<br>");
+    echo("password: {$password}<br>");
+    echo("password2: {$password2}<br>");
 }
 
 ?>
@@ -34,7 +48,7 @@ if (isset($_POST["submitButton"])) {
 
                 <input type="text" name="lastName" placeholder="Last name">
 
-                <input type="text" name="userName" placeholder="Username">
+                <input type="text" name="username" placeholder="Username">
 
                 <input type="email" name="email" placeholder="Email">
 
