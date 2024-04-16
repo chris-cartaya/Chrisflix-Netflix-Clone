@@ -17,21 +17,46 @@ class Account {
         $this->con = $con;
     }
 
-    public function register($fn, $ln, $un, $em, $em2, $pw, $pw2) {
-        $this->validateFirstName($fn);
-        $this->validateLastName($ln);
+    public function register($firstName, $lastName, $username, 
+                             $email, $email2, $password, $password2) {
+        $this->validateFirstName($firstName);
+        $this->validateLastName($lastName);
+        $this->validateUserName($username);
     }
 
-    private function validateFirstName($fname) {
-        if (strlen($fname) < 2 || strlen($fname) > 25) {
+    private function validateFirstName($firstName) {
+        if (strlen($firstName) < Constants::NAME_MIN_CHARS || 
+            strlen($firstName) > Constants::NAME_MAX_CHARS) {
             array_push($this->errorArr, Constants::$firstNameCharacters);
         }
     }
 
-    private function validateLastName($lname) {
-        if (strlen($fname) < 2 || strlen($fname) > 25) {
+    private function validateLastName($lastName) {
+        if (strlen($lastName) < Constants::NAME_MIN_CHARS || 
+            strlen($lastName) > Constants::NAME_MAX_CHARS) {
             array_push($this->errorArr, Constants::$lastNameCharacters);
         }
+    }
+
+    private function validateUserName($username) {
+        if (strlen($username) < Constants::USERNAME_MIN_CHARS || 
+            strlen($username) > Constants::USERNAME_MAX_CHARS) {
+            array_push($this->errorArr, Constants::$usernameCharacters);
+            return;
+        }
+
+        $sql = "SELECT * 
+                FROM users 
+                WHERE username = :username;";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+
+        if ($stmt->rowCount() != 0) {
+            array_push($this->errorArr, Constants::$usernameTaken);
+        }
+
     }
 
     public function getError($error) {

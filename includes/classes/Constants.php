@@ -14,5 +14,8 @@ class Constants {
 
     public static $usernameCharacters = "Username must be between " . self::USERNAME_MIN_CHARS . " and " . 
     self::USERNAME_MAX_CHARS . " characters";
+
+    public static $usernameTaken = "Username already in use";
+   
 }
 ?>
