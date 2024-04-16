@@ -25,8 +25,13 @@ if (isset($_POST["submitButton"])) {
     echo "password: ";  var_dump($password);    echo "<br>";
     echo "password2: "; var_dump($password2);   echo "<br>";
 
-    $account->register($firstName, $lastName, $username, 
-                       $email, $email2, $password, $password2);
+    $success = $account->register($firstName, $lastName, $username, $email, 
+                                  $email2, $password, $password2);
+    
+    if ($success) {
+        // Store session variables --- do later.
+        header("Location: index.php");
+    }
 }
 ?>
 <!DOCTYPE html>

@@ -24,6 +24,33 @@ class Account {
         $this->validateUserName($username);
         $this->validateEmails($email, $email2);
         $this->validatePasswords($password, $password2);
+
+        if (empty($this->errorArr)) {
+            return $this->insertUserDetails($firstName, $lastName, $username, 
+                                            $email, $password);
+        }
+
+        return false;
+    }
+
+    private function insertUserDetails($firstName, $lastName, $username, 
+                                       $email, $password) {
+        $password = hash("sha512", $password);
+        
+        $sql = "INSERT INTO 
+                    users (firstName, lastName, username, email, password)
+                VALUES (:firstName, :lastName, :username, :email, :password)";
+        
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->bindValue(':firstName', $firstName, PDO::PARAM_STR);
+        $stmt->bindValue(':lastName', $lastName, PDO::PARAM_STR);
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+
+        return $stmt->execute();
+
     }
 
     private function validateFirstName($firstName) {
