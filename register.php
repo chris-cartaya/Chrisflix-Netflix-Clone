@@ -51,32 +51,62 @@ if (isset($_POST["submitButton"])) {
             <form action="" method="POST">
                 <!-- add required to all inputs later -->
                 <?= $account->getError(Constants::$firstNameCharacters); ?>
-                <input type="text" name="firstName" 
-                       placeholder="First name" required>
+                <input 
+                    type="text" 
+                    name="firstName" 
+                    placeholder="First name" 
+                    required
+                >
 
                 <?= $account->getError(Constants::$lastNameCharacters); ?>
-                <input type="text" name="lastName" 
-                       placeholder="Last name" required>
+                <input 
+                    type="text" 
+                    name="lastName" 
+                    placeholder="Last name" 
+                    required
+                >
 
                 <?= $account->getError(Constants::$usernameCharacters); ?>
                 <?= $account->getError(Constants::$usernameTaken); ?>
-                <input type="text" name="username" 
-                       placeholder="Username" required>
+                <input 
+                    type="text" 
+                    name="username" 
+                    placeholder="Username" 
+                    required
+                >
 
                 <?= $account->getError(Constants::$emailsDoNotMatch); ?>
                 <?= $account->getError(Constants::$emailInvalid); ?>
                 <?= $account->getError(Constants::$emailTaken); ?>
-                <input type="email" name="email" 
-                placeholder="Email" required>
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Email" 
+                    required
+                >
                 
-                <input type="email" name="email2" 
-                       placeholder="Confirm email" required>
+                <input 
+                    type="email" 
+                    name="email2" 
+                    placeholder="Confirm email" 
+                    required
+                >
+                
+                <?= $account->getError(Constants::$passwordsDoNotMatch); ?>
+                <?= $account->getError(Constants::$passwordLength); ?>
+                <input 
+                    type="password" 
+                    name="password" 
+                    placeholder="Password"
+                    required
+                >
 
-                <input type="password" name="password" 
-                       placeholder="Password">
-
-                <input type="password" name="password2" 
-                       placeholder="Confirm password">
+                <input 
+                    type="password" 
+                    name="password2" 
+                    placeholder="Confirm password"
+                    required
+                >
 
                 <input type="submit" name="submitButton" value="SUBMIT">
 

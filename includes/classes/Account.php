@@ -23,6 +23,7 @@ class Account {
         $this->validateLastName($lastName);
         $this->validateUserName($username);
         $this->validateEmails($email, $email2);
+        $this->validatePasswords($password, $password2);
     }
 
     private function validateFirstName($firstName) {
@@ -82,6 +83,19 @@ class Account {
         if ($stmt->rowCount() != 0) {
             array_push($this->errorArr, Constants::$emailTaken);
         }
+    }
+
+    private function validatePasswords($password, $password2) {
+        if ($password != $password2) {
+            array_push($this->errorArr, Constants::$passwordsDoNotMatch);
+            return;
+        }
+
+        if (strlen($password) < Constants::PASSWORD_MIN_CHARS || 
+            strlen($password) > Constants::PASSWORD_MAX_CHARS) {
+            array_push($this->errorArr, Constants::$passwordLength);
+        }
+
     }
 
     public function getError($error) {
