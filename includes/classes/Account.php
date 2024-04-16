@@ -6,9 +6,21 @@ class Account {
      * @var object PDO object 
      */
     private $con;
+
+    /**
+     * Holds all error messages
+     * @var array Error array
+     */
+    private $errorArr = array();
     
     public function __construct($con) {
         $this->con = $con;
+    }
+
+    public function validateFirstName($fname) {
+        if(strlen($fname) < 2 || strlen($fname) > 25) {
+            array_push($this->errorArr, "First name wrong length");
+        }
     }
 
 }
