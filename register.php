@@ -17,13 +17,13 @@ if (isset($_POST["submitButton"])) {
     $password = FormSanitizer::sanitizeFormPassword($_POST['password']);
     $password2 = FormSanitizer::sanitizeFormPassword($_POST['password2']);
     
-    echo "firstName: "; var_dump($firstName);
-    // echo("lastName: {$lastName}<br>");
-    // echo("username: {$username}<br>");
-    // echo("email: {$email}<br>");
-    // echo("email2: {$email2}<br>");
-    // echo("password: {$password}<br>");
-    // echo("password2: {$password2}<br>");
+    echo "firstName: "; var_dump($firstName);   echo "<br>";
+    echo "lastName: ";  var_dump($lastName);    echo "<br>";
+    echo "username: ";  var_dump($username);    echo "<br>";
+    echo "email: ";     var_dump($email);       echo "<br>";
+    echo "email2: ";    var_dump($email2);      echo "<br>";
+    echo "password: ";  var_dump($password);    echo "<br>";
+    echo "password2: "; var_dump($password2);   echo "<br>";
 
     $account->register($firstName, $lastName, $username, 
                        $email, $email2, $password, $password2);
@@ -63,11 +63,14 @@ if (isset($_POST["submitButton"])) {
                 <input type="text" name="username" 
                        placeholder="Username" required>
 
+                <?= $account->getError(Constants::$emailsDoNotMatch); ?>
+                <?= $account->getError(Constants::$emailInvalid); ?>
+                <?= $account->getError(Constants::$emailTaken); ?>
                 <input type="email" name="email" 
-                       placeholder="Email">
-
+                placeholder="Email" required>
+                
                 <input type="email" name="email2" 
-                       placeholder="Confirm email">
+                       placeholder="Confirm email" required>
 
                 <input type="password" name="password" 
                        placeholder="Password">

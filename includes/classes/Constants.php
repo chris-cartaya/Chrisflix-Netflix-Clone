@@ -16,6 +16,12 @@ class Constants {
     self::USERNAME_MAX_CHARS . " characters";
 
     public static $usernameTaken = "Username already in use";
+
+    public static $emailsDoNotMatch = "Emails do not match";
+
+    public static $emailInvalid = "Invalid email";
+    
+    public static $emailTaken = "Email already in use";
    
 }
 ?>
