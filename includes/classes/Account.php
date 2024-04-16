@@ -18,8 +18,14 @@ class Account {
     }
 
     public function validateFirstName($fname) {
-        if(strlen($fname) < 2 || strlen($fname) > 25) {
+        if (strlen($fname) < 2 || strlen($fname) > 25) {
             array_push($this->errorArr, "First name wrong length");
+        }
+    }
+
+    public function getError($error) {
+        if (in_array($error, $this->errorArr)) {
+            return $error;
         }
     }
 

@@ -17,14 +17,15 @@ if (isset($_POST["submitButton"])) {
     $password2 = FormSanitizer::sanitizeFormPassword($_POST['password2']);
     
     echo("firstName: {$firstName}<br>");
-    echo("lastName: {$lastName}<br>");
-    echo("username: {$username}<br>");
-    echo("email: {$email}<br>");
-    echo("email2: {$email2}<br>");
-    echo("password: {$password}<br>");
-    echo("password2: {$password2}<br>");
-}
+    // echo("lastName: {$lastName}<br>");
+    // echo("username: {$username}<br>");
+    // echo("email: {$email}<br>");
+    // echo("email2: {$email2}<br>");
+    // echo("password: {$password}<br>");
+    // echo("password2: {$password2}<br>");
 
+    $account->validateFirstName($firstName);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,6 +48,7 @@ if (isset($_POST["submitButton"])) {
         
             <form action="" method="POST">
                 <!-- add required to all inputs later -->
+                <?= $account->getError("First name wrong length"); ?>
                 <input type="text" name="firstName" placeholder="First name">
 
                 <input type="text" name="lastName" placeholder="Last name">
