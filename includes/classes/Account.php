@@ -17,9 +17,20 @@ class Account {
         $this->con = $con;
     }
 
-    public function validateFirstName($fname) {
+    public function register($fn, $ln, $un, $em, $em2, $pw, $pw2) {
+        $this->validateFirstName($fn);
+        $this->validateLastName($ln);
+    }
+
+    private function validateFirstName($fname) {
         if (strlen($fname) < 2 || strlen($fname) > 25) {
             array_push($this->errorArr, Constants::$firstNameCharacters);
+        }
+    }
+
+    private function validateLastName($lname) {
+        if (strlen($fname) < 2 || strlen($fname) > 25) {
+            array_push($this->errorArr, Constants::$lastNameCharacters);
         }
     }
 

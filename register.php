@@ -25,7 +25,8 @@ if (isset($_POST["submitButton"])) {
     // echo("password: {$password}<br>");
     // echo("password2: {$password2}<br>");
 
-    $account->validateFirstName($firstName);
+    $account->register($firstName, $lastName, $username, 
+                       $email, $email2, $password, $password2);
 }
 ?>
 <!DOCTYPE html>
@@ -50,8 +51,9 @@ if (isset($_POST["submitButton"])) {
             <form action="" method="POST">
                 <!-- add required to all inputs later -->
                 <?= $account->getError(Constants::$firstNameCharacters); ?>
-            <input type="text" name="firstName" placeholder="First name" required>
+                <input type="text" name="firstName" placeholder="First name" required>
 
+                <?= $account->getError(Constants::$lastNameCharacters); ?>
                 <input type="text" name="lastName" placeholder="Last name">
 
                 <input type="text" name="username" placeholder="Username">
