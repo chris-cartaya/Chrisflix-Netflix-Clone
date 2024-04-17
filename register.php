@@ -33,6 +33,12 @@ if (isset($_POST["submitButton"])) {
         header("Location: index.php");
     }
 }
+
+function getInputValue($name) {
+    if (isset($_POST[$name])) {
+        echo $_POST[$name];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,6 +66,7 @@ if (isset($_POST["submitButton"])) {
                     type="text" 
                     name="firstName" 
                     placeholder="First name" 
+                    value="<?= getInputValue("firstName"); ?>"
                     required
                 >
 
@@ -68,6 +75,7 @@ if (isset($_POST["submitButton"])) {
                     type="text" 
                     name="lastName" 
                     placeholder="Last name" 
+                    value="<?= getInputValue("lastName"); ?>"
                     required
                 >
 
@@ -77,6 +85,7 @@ if (isset($_POST["submitButton"])) {
                     type="text" 
                     name="username" 
                     placeholder="Username" 
+                    value="<?= getInputValue("username"); ?>"
                     required
                 >
 
@@ -87,6 +96,7 @@ if (isset($_POST["submitButton"])) {
                     type="email" 
                     name="email" 
                     placeholder="Email" 
+                    value="<?= getInputValue("email"); ?>"
                     required
                 >
                 
@@ -94,6 +104,7 @@ if (isset($_POST["submitButton"])) {
                     type="email" 
                     name="email2" 
                     placeholder="Confirm email" 
+                    value="<?= getInputValue("email2"); ?>"
                     required
                 >
                 
