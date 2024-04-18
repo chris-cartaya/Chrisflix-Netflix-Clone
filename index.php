@@ -11,5 +11,5 @@ echo "IN INDEX.PHP FILE!<br>";
 
 
 $preview = new PreviewProvider($con, $userLoggedIn);
-echo $preview->createPreviewVideo();
+echo $preview->createPreviewVideo(null);
 ?>
