@@ -6,3 +6,9 @@ function volumeToggle(button) {
   $(button).find("i").toggleClass("fa-volume-xmark");
   $(button).find("i").toggleClass("fa-volume-high");
 }
+
+// When preview video finishes playing, display the image
+function previewEnded() {
+  $(".previewVideo").toggle();  // Hide video
+  $(".previewImage").toggle();  // Show image
+}
