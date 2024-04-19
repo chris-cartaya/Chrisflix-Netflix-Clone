@@ -17,6 +17,8 @@ if (!isset($userLoggedIn)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Chrisflix</title>
     <link rel="stylesheet" type="text/css" href="assets/style/style.css">
+    <script src="https://kit.fontawesome.com/01aa4a6840.js" 
+            crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="wrapper">

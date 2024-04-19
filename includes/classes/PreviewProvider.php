@@ -46,8 +46,12 @@ class PreviewProvider {
                         <h1>$entityName</h1>
 
                         <div class='buttons'>
-                            <button>Play</button>
-                            <button>Volume</button>
+                            <button>
+                                <i class='fa-solid fa-play'></i> Play
+                            </button>
+                            <button>
+                                <i class='fa-solid fa-volume-xmark'></i>
+                            </button>
                         </div>
 
                     </div>
