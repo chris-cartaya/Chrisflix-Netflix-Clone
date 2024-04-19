@@ -120,3 +120,17 @@ body {
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
 }
+
+.previewOverlay .mainDetails h1 {
+  color: #fff;
+  font-size: 40px;
+  margin: 15px 0;
+}
+
+.previewOverlay .mainDetails {
+  position: relative;
+  top: 35%;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+}
