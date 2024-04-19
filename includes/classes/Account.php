@@ -244,7 +244,7 @@ class Account {
      * 
      * @return string|null The error message or null if error not found.
      */
-    public function getError(string $error): ?string {
+    public function getError(string $error) {
         if (in_array($error, $this->errorArr)) {
             return "<span class='errorMessage'>$error</span>";
         }
