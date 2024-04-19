@@ -35,9 +35,14 @@ class PreviewProvider {
                         class='previewImage'
                         hidden
                     >
+                    
                     <video autoplay muted class='previewVideo'>
                         <source src='$preview' type='video/mp4'>
                     </video>
+
+                    <div class='previewOverlay'>
+                        hello
+                    </div>
                 </div>";
 
     }
