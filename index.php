@@ -1,15 +1,7 @@
 <?php
-require_once("includes/config.php");
-require_once("includes/classes/PreviewProvider.php");
-require_once("includes/classes/Entity.php");
+require_once("includes/header.php");
 
-$userLoggedIn = $_SESSION["userLoggedIn"];
-
-if (!isset($userLoggedIn)) {
-    header("Location: register.php");
-}
 echo "IN INDEX.PHP FILE!<br>";
-
 
 $preview = new PreviewProvider($con, $userLoggedIn);
 echo $preview->createPreviewVideo(null);
