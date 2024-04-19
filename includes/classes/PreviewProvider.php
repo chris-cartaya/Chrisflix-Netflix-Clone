@@ -3,22 +3,37 @@ class PreviewProvider {
 
     /**
      * Connection to the database
-     * @var object PDO object 
+     * @var PDO The PDO object representing the database connection.
      */
-    private $con;
+    private PDO $con;
 
+    /**
+     * The user logged in
+     * @var string username
+     */
     private $username;
 
-    public function __construct($con, $username) {
+    public function __construct($con, string $username) {
         $this->con = $con;
         $this->username = $username;
     }
 
     public function createPreviewVideo($entity) {
         if ($entity == null) {
-            // create a random entity
             $entity = $this->getRandomEntity();
         }
+
+        $id = $entity->getId();
+        $entityName = $entity->getName();
+        $thumbnail = $entity->getThumbnail();
+        $preview = $entity->getPreview();
+
+        echo $id . "<br>";
+        echo $entityName . "<br>";
+        echo $thumbnail . "<br>";
+        echo "<img src='$thumbnail'><br>";
+        echo $preview . "<br>";
+
     }
 
     private function getRandomEntity() {
@@ -31,7 +46,8 @@ class PreviewProvider {
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo $row["name"];
+
+        return new Entity($this->con, $row);
     }
 
 }
