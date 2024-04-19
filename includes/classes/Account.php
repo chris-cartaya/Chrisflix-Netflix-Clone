@@ -1,24 +1,47 @@
 <?php
+/**
+ * Represents an user account management system.
+ */
 class Account {
     
     /**
      * Connection to the database
-     * @var object PDO object 
+     * @var PDO The PDO object representing the database connection.
      */
-    private $con;
+    private PDO $con;
 
     /**
      * Holds all error messages
      * @var array Error array
      */
-    private $errorArr = array();
+    private array $errorArr = [];
     
+    /**
+     * Account constructor.
+     * 
+     * @param PDO $con The PDO object representing the database connection.
+     */
     public function __construct($con) {
         $this->con = $con;
     }
 
-    public function register($firstName, $lastName, $username, 
-                             $email, $email2, $password, $password2) {
+    /**
+     * Registers a new user account.
+     * 
+     * @param string $firstName The first name of the user.
+     * @param string $lastName The last name of the user.
+     * @param string $username The username of the user.
+     * @param string $email The email address of the user.
+     * @param string $email2 The confirmation email address of the user.
+     * @param string $password The password of the user.
+     * @param string $password2 The confirmation password of the user.
+     * 
+     * @return bool True if registration is successful, false otherwise.
+     */
+    public function register(
+        string $firstName, string $lastName, string $username, 
+        string $email, string $email2, string $password, string $password2
+    ): bool {
         $this->validateFirstName($firstName);
         $this->validateLastName($lastName);
         $this->validateUserName($username);
@@ -26,14 +49,23 @@ class Account {
         $this->validatePasswords($password, $password2);
 
         if (empty($this->errorArr)) {
-            return $this->insertUserDetails($firstName, $lastName, $username, 
-                                            $email, $password);
+            return $this->insertUserDetails(
+                $firstName, $lastName, $username, $email, $password
+            );
         }
 
         return false;
     }
 
-    public function login($username, $password) {
+    /**
+     * Logs in the user.
+     * 
+     * @param string $username The username of the user.
+     * @param string $password The password of the user.
+     * 
+     * @return bool True if login is successful, false otherwise.
+     */
+    public function login(string $username, string $password): bool {
         $password = hash("sha512", $password);
 
         $sql = "SELECT *
@@ -55,13 +87,27 @@ class Account {
         return false;
     }
 
-    private function insertUserDetails($firstName, $lastName, $username, 
-                                       $email, $password) {
+    /**
+     * Inserts user details into the database.
+     * 
+     * @param string $firstName The first name of the user.
+     * @param string $lastName The last name of the user.
+     * @param string $username The username of the user.
+     * @param string $email The email address of the user.
+     * @param string $password The password of the user.
+     * 
+     * @return bool True if insertion is successful, false otherwise.
+     */
+    private function insertUserDetails(
+        string $firstName, string $lastName, string $username, 
+        string $email, string $password
+    ): bool {
         $password = hash("sha512", $password);
         
-        $sql = "INSERT INTO 
-                    users (firstName, lastName, username, email, password)
-                VALUES (:firstName, :lastName, :username, :email, :password)";
+        $sql = "INSERT INTO users 
+                    (firstName, lastName, username, email, password)
+                VALUES 
+                    (:firstName, :lastName, :username, :email, :password)";
         
         $stmt = $this->con->prepare($sql);
 
@@ -75,21 +121,45 @@ class Account {
 
     }
 
-    private function validateFirstName($firstName) {
+    /**
+     * Validates the first name of the user.
+     * 
+     * @param string $firstName The first name to validate.
+     * 
+     * @return void
+     */
+    private function validateFirstName(string $firstName): void {
         if (strlen($firstName) < Constants::NAME_MIN_CHARS || 
-            strlen($firstName) > Constants::NAME_MAX_CHARS) {
+            strlen($firstName) > Constants::NAME_MAX_CHARS) 
+        {
             array_push($this->errorArr, Constants::$firstNameCharacters);
         }
     }
 
-    private function validateLastName($lastName) {
+    /**
+     * Validates the last name of the user.
+     * 
+     * @param string $lastName The last name to validate.
+     * 
+     * @return void
+     */
+    private function validateLastName(string $lastName): void {
         if (strlen($lastName) < Constants::NAME_MIN_CHARS || 
             strlen($lastName) > Constants::NAME_MAX_CHARS) {
             array_push($this->errorArr, Constants::$lastNameCharacters);
         }
     }
 
-    private function validateUserName($username) {
+    /**
+     * Validates the username of the user.
+     * Checks if the username meets length requirements and if it is already 
+     * taken.
+     * 
+     * @param string $username The username to validate.
+     * 
+     * @return void
+     */
+    private function validateUserName(string $username): void {
         if (strlen($username) < Constants::USERNAME_MIN_CHARS || 
             strlen($username) > Constants::USERNAME_MAX_CHARS) {
             array_push($this->errorArr, Constants::$usernameCharacters);
@@ -109,7 +179,16 @@ class Account {
         }
     }
 
-    private function validateEmails($email, $email2) {
+    /**
+     * Validates the email addresses of the user.
+     * Checks if the emails match and if they are valid.
+     * 
+     * @param string $email The primary email address.
+     * @param string $email2 The confirmation email address.
+     * 
+     * @return void
+     */
+    private function validateEmails(string $email, string $email2): void {
         if ($email != $email2) {
             array_push($this->errorArr, Constants::$emailsDoNotMatch);
             return;
@@ -134,7 +213,18 @@ class Account {
         }
     }
 
-    private function validatePasswords($password, $password2) {
+    /**
+     * Validates the passwords of the user.
+     * Checks if the passwords match and if they meet length requirements.
+     * 
+     * @param string $password The password.
+     * @param string $password2 The confirmation password.
+     * 
+     * @return void
+     */
+    private function validatePasswords(
+        string $password, string $password2
+    ): void {
         if ($password != $password2) {
             array_push($this->errorArr, Constants::$passwordsDoNotMatch);
             return;
@@ -147,7 +237,14 @@ class Account {
 
     }
 
-    public function getError($error) {
+    /**
+     * Gets the error message based on error code.
+     * 
+     * @param string $error The error code.
+     * 
+     * @return string|null The error message or null if error not found.
+     */
+    public function getError(string $error): ?string {
         if (in_array($error, $this->errorArr)) {
             return "<span class='errorMessage'>$error</span>";
         }
