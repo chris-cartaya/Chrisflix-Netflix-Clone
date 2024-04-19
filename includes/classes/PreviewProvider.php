@@ -28,11 +28,17 @@ class PreviewProvider {
         $thumbnail = $entity->getThumbnail();
         $preview = $entity->getPreview();
 
-        echo $id . "<br>";
-        echo $entityName . "<br>";
-        echo $thumbnail . "<br>";
-        echo "<img src='$thumbnail'><br>";
-        echo $preview . "<br>";
+        return "<div class='previewContainer'>
+                    <img 
+                        src='$thumbnail' 
+                        alt='Video poster of $entityName'
+                        class='previewImage'
+                        hidden
+                    >
+                    <video autoplay muted class='previewVideo'>
+                        <source src='$preview' type='video/mp4'>
+                    </video>
+                </div>";
 
     }
 
