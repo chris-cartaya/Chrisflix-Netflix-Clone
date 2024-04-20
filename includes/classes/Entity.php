@@ -60,6 +60,10 @@ class Entity {
 
     public function getPreview() {
         return $this->sqlData["preview"];
+    
+    }
+    public function getCategoryId() {
+        return $this->sqlData["categoryId"];
     }
 
     public function getSeasons() {

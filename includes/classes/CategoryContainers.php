@@ -20,7 +20,7 @@ class CategoryContainers {
 
     public function showAllCategories(): string {
 
-        $stmt = $this->con->prepare("SELECT * FROM CATEGORIES");
+        $stmt = $this->con->prepare("SELECT * FROM categories");
         $stmt->execute();
 
         $html = "<div class='previewCategories'>";
@@ -28,6 +28,26 @@ class CategoryContainers {
         // $row will continue iterating for each row from the query.
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $html .= $this->getCategoryHTML($row, null, true, true);
+        }
+
+        return $html . "</div>";
+    }
+
+    // Shows all entities that below to a certain category
+    public function showCategory(int $categoryId, ?string $title = null) {
+        
+        $sql = "SELECT * 
+                FROM categories 
+                WHERE id = :id";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(":id", $categoryId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $html = "<div class='previewCategories noScroll'>";
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $html .= $this->getCategoryHTML($row, $title, true, true);
         }
 
         return $html . "</div>";
@@ -44,7 +64,7 @@ class CategoryContainers {
     // both tv shows and movies, and there will be separate 'tabs' for movies 
     // and tv shows.
     private function getCategoryHTML(
-        $sqlData, ?string $title, bool $tvShows, bool $movies
+        array $sqlData, ?string $title, bool $tvShows, bool $movies
     ) {
         $categoryId = $sqlData["id"];
         $title = $title == null ? $sqlData["name"] : $title;
