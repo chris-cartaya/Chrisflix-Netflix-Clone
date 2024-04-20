@@ -69,7 +69,7 @@ class Entity {
                 ORDER BY season, episode ASC";
 
         $stmt = $this->con->prepare($sql);
-        $stmt->bindValue(":id", $entity->getId(), PDO::PARAM_INT);
+        $stmt->bindValue(":id", $this->getId(), PDO::PARAM_INT);
         $stmt->execute();
 
         $seasons = [];
@@ -77,10 +77,21 @@ class Entity {
         $currentSeason = null;
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             
+            if ($currentSeason != null && $currentSeason != $row["season"]) {
+                $seasons[] = new Season($currentSeason, $videos);
+                $videos = [];
+            }
+
             $currentSeason = $row["season"];
             $videos[] = new Video($this->con, $row);
 
         }
+
+        if (sizeof($videos) != 0) {
+            $seasons[] = new Season($currentSeason, $videos);
+        }
+
+        return $seasons;
     }
 
 }
