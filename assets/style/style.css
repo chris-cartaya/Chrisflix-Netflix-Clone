@@ -271,3 +271,10 @@ button i {
 .previewCategories.noScroll .category .entities {
   white-space: normal;
 }
+
+
+/* watch Video page */
+
+.watchContainer video {
+  width: 100%;
+}
