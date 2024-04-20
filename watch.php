@@ -11,7 +11,7 @@ $video->incrementViews();
 <div class="watchContainer">
 
     <div class="videoControls watchNav">
-        <button>
+        <button onclick="goBack()">
             <i class="fa-solid fa-arrow-left"></i>
         </button>
 

@@ -298,4 +298,9 @@ button i {
   color: #fff;
   background-color: transparent;
   border: none;
+  cursor: pointer;
+}
+
+.videoControls button i:hover {
+  color: #e6e6e6;
 }

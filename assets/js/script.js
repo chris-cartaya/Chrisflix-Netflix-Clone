@@ -12,3 +12,8 @@ function previewEnded() {
   $(".previewVideo").toggle();  // Hide video
   $(".previewImage").toggle();  // Show image
 }
+
+// Used to go back one page
+function goBack() {
+  window.history.back();
+}
