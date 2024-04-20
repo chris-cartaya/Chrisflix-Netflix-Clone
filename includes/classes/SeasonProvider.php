@@ -19,7 +19,7 @@ class SeasonProvider {
     }
 
     public function create($entity) {
-        
+        $seasons = $entity->getSeasons();
     }
 
 }

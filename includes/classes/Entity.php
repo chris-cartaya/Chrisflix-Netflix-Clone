@@ -12,7 +12,7 @@ class Entity {
 
     /**
      * Data array representing entity attributes or the entity ID.
-     * @var array|int sqlData
+     * @var array sqlData
      */
     private $sqlData;
 
@@ -62,7 +62,16 @@ class Entity {
         return $this->sqlData["preview"];
     }
 
-    
+    public function getSeasons() {
+        $sql = "SELECT *
+                FROM videos
+                WHERE entityId = :id AND isMovie = 0
+                ORDER BY season, episode ASC";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(":id", $entity->getId(), PDO::PARAM_INT);
+        $stmt->execute();
+    }
 
 }
 ?>
