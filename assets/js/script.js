@@ -41,8 +41,23 @@ function initVideo(videoID, username) {
 
 function updateProgressTimer(videoID, username) {
   addDuration(videoID, username);
+
+  let timer;
+
+  // Keeps track of each time the video is played.
+  $("video").on("playing", function(event) {
+    window.clearInterval(timer);
+    timer = window.setInterval(function() {
+      console.log("setInterval runs");  // need to update video progress here.
+    }, 3000);
+  })
+  .on("ended", function() {
+    window.clearInterval(timer);
+  })
 }
 
+
+// Makes AJAX request to add duration to table in database
 function addDuration(videoID, username) {
   $.post("ajax/addDuration.php", 
     { 
