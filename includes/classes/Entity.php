@@ -25,10 +25,10 @@ class Entity {
      * provided, it represents the entity ID to fetch data from the database.
      * 
      * @param PDO $con The PDO object representing the database connection.
-     * @param array|int $input An array of data to create entity or an integer 
-     * ID to fetch entity.
+     * @param array|string $input An array of data to create entity or a string
+     * integer ID to fetch entity.
      */
-    public function __construct(PDO $con, array|int $input) {
+    public function __construct(PDO $con, array|string $input) {
         $this->con = $con;
 
         if (is_array($input)) {
