@@ -8,6 +8,7 @@
   --btn-bg-color: #4285f4;
 
   --white-text-color: #fff;
+  --netflix-off-white-text-color: #e5e5e5;
   --std-black-text-color: #000;
   --secondary-black-text-color: #333;
   --error-text-color: #f00;
@@ -24,6 +25,18 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--secondary-black-text-color);
   box-sizing: border-box;
+}
+
+h3 {
+  color: var(--netflix-off-white-text-color);
+}
+
+a h3:hover {
+  color: var(--white-text-color);
+}
+
+a {
+  text-decoration: none;
 }
 
 .wrapper {
@@ -187,4 +200,16 @@ button i {
 .mainDetails button:hover {
   background-color: #e6e6e6;
   color: #000;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.entities {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
