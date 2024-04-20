@@ -20,6 +20,28 @@ class SeasonProvider {
 
     public function create($entity) {
         $seasons = $entity->getSeasons();
+
+        if (sizeof($seasons) == 0) {
+            return;
+        }
+
+        $seasonsHTML = "";
+
+
+
+        foreach ($seasons as $season) {
+            $seasonNumber = $season->getSeasonNumber();
+
+            // get video html
+
+            $seasonsHTML .= 
+                "<div class='season'>
+                    <h3>Season $seasonNumber</h3>
+                </div>";
+
+        }
+
+        return $seasonsHTML;
     }
 
 }
