@@ -24,5 +24,5 @@ $video->incrementViews();
 </div>
 
 <script>
-    initVideo();
+    initVideo("<?= $video->getId(); ?>", "<?= $userLoggedIn ?>");
 </script>

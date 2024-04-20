@@ -33,6 +33,8 @@ function startHideTimer() {
 }
 
 // Initializes the video. Does any set up we want to do when the page loads.
-function initVideo() {
+function initVideo(videoID, userLoggedIn) {
   startHideTimer();
+  console.log(videoID);
+  console.log(userLoggedIn);
 }
