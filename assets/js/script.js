@@ -48,7 +48,7 @@ function updateProgressTimer(videoID, username) {
   $("video").on("playing", function(event) {
     window.clearInterval(timer);
     timer = window.setInterval(function() {
-      console.log("setInterval runs");  // need to update video progress here.
+      updateProgress(videoID, username, event.target.currentTime);
     }, 3000);
   })
   .on("ended", function() {
@@ -56,13 +56,28 @@ function updateProgressTimer(videoID, username) {
   })
 }
 
-
-// Makes AJAX request to add duration to table in database
+// Makes AJAX request to add duration to progress table in database
 function addDuration(videoID, username) {
   $.post("ajax/addDuration.php", 
     { 
       videoID: videoID, 
       username: username
+    }, 
+    function(data) {
+      if (data !== null && data !== "") {
+        alert(data);
+      }
+    }
+  );
+}
+
+// Makes AJAX request to update duration to progress table in database
+function updateProgress(videoID, username, progress) {
+  $.post("ajax/updateDuration.php", 
+    { 
+      videoID: videoID, 
+      username: username,
+      progress: progress
     }, 
     function(data) {
       if (data !== null && data !== "") {
