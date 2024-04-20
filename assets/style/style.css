@@ -217,3 +217,13 @@ button i {
 .previewCategories {
   padding: 0 50px;
 }
+
+/* When no ID gets passed to URL */
+.errorBanner {
+  color: #fff;
+  position: absolute;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
