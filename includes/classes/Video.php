@@ -1,9 +1,6 @@
 <?php
-/**
- * Represents an video entity in the database.
- */
-class Entity {
-
+class Video {
+    
     /**
      * Connection to the database
      * @var PDO The PDO object representing the database connection.
@@ -15,6 +12,12 @@ class Entity {
      * @var array sqlData
      */
     private $sqlData;
+
+    /**
+     * What entity does the video correspond to
+     * @var Entity
+     */
+    private $entity;
 
     /**
      * Entity constructor.
@@ -44,44 +47,8 @@ class Entity {
 
             $this->sqlData = $stmt->fetch(PDO::FETCH_ASSOC);
         }
+
+        $this->entity = new Entity($con, $this->sqlData["entityId"]);
     }
-
-    public function getId() {
-        return $this->sqlData["id"];
-    }
-
-    public function getName() {
-        return $this->sqlData["name"];
-    }
-
-    public function getThumbnail() {
-        return $this->sqlData["thumbnail"];
-    }
-
-    public function getPreview() {
-        return $this->sqlData["preview"];
-    }
-
-    public function getSeasons() {
-        $sql = "SELECT *
-                FROM videos
-                WHERE entityId = :id AND isMovie = 0
-                ORDER BY season, episode ASC";
-
-        $stmt = $this->con->prepare($sql);
-        $stmt->bindValue(":id", $entity->getId(), PDO::PARAM_INT);
-        $stmt->execute();
-
-        $seasons = [];
-        $videos = [];
-        $currentSeason = null;
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            
-            $currentSeason = $row["season"];
-            $videos[] = new Video($this->con, $row);
-
-        }
-    }
-
 }
 ?>
