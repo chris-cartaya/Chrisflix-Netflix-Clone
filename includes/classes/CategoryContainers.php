@@ -45,14 +45,31 @@ class CategoryContainers {
     // and tv shows.
     private function getCategoryHTML(
         $sqlData, ?string $title, bool $tvShows, bool $movies
-    ): string {
-        $categoryID = $sqlData["id"];
+    ) {
+        $categoryId = $sqlData["id"];
         $title = $title == null ? $sqlData["name"] : $title;
-
-        // Get all entities within this category
         
+        if ($tvShows && $movies) {
+            $entities = EntityProvider::getEntities(
+                $this->con, $categoryId, 30
+            );
+        } else if ($tvShows) {
+            // Get tv show entities
+        } else {
+            // Get movie entities
+        }
 
-        return $title . "<br>";
+        if (sizeof($entities) == 0) {
+            return;
+        }
+
+        $entitiesHTML = "";
+
+        foreach ($entities as $entity) {
+            $entitiesHTML .= $entity->getName();
+        }
+
+        return $entitiesHTML . "<br>";
     }
 
 }
