@@ -49,6 +49,9 @@ class CategoryContainers {
         $categoryID = $sqlData["id"];
         $title = $title == null ? $sqlData["name"] : $title;
 
+        // Get all entities within this category
+        
+
         return $title . "<br>";
     }
 
