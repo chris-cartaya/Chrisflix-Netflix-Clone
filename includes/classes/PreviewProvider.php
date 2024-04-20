@@ -13,7 +13,7 @@ class PreviewProvider {
      */
     private $username;
 
-    public function __construct($con, string $username) {
+    public function __construct(PDO $con, string $username) {
         $this->con = $con;
         $this->username = $username;
     }
@@ -72,11 +72,27 @@ class PreviewProvider {
 
     }
 
+    public function createEntityPreviewSquare($entity) {
+        $id = $entity->getId();
+        $entityName = $entity->getName();
+        $thumbnail = $entity->getThumbnail();
+
+        return 
+            "<a href='entity.php?id=$id'>
+                <div class='previewContainer small'>
+                    <img 
+                        src='$thumbnail' 
+                        alt='Thumbnail poster of $entityName' 
+                        title='$entityName'
+                    >
+                </div>
+            </a>";
+    }
+
+
     private function getRandomEntity() {
-        
         $entity = EntityProvider::getEntities($this->con, null, 1);
         return $entity[0];
-
     }
 
 }

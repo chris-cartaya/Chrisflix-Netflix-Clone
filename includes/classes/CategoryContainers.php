@@ -65,8 +65,10 @@ class CategoryContainers {
 
         $entitiesHTML = "";
 
+        $previewProvider = new PreviewProvider($this->con, $this->username);
         foreach ($entities as $entity) {
-            $entitiesHTML .= $entity->getName();
+            $entitiesHTML .= 
+                $previewProvider->createEntityPreviewSquare($entity);
         }
 
         return $entitiesHTML . "<br>";
