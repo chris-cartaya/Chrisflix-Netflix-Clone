@@ -22,3 +22,7 @@ $video->incrementViews();
         <source src="<?= $video->getFilePath(); ?>" type="video/mp4">
     </video>
 </div>
+
+<script>
+    initVideo();
+</script>

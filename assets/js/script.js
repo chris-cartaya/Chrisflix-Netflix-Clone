@@ -17,3 +17,22 @@ function previewEnded() {
 function goBack() {
   window.history.back();
 }
+
+// Show/hide video title and back button on video player
+function startHideTimer() {
+  let timeout = null;
+  
+  $(document).on("mousemove", function() {
+    clearTimeout(timeout);
+    $(".watchNav").fadeIn();
+
+    timeout = setTimeout(function() {
+      $(".watchNav").fadeOut();
+    }, 2000);
+  });
+}
+
+// Initializes the video. Does any set up we want to do when the page loads.
+function initVideo() {
+  startHideTimer();
+}
