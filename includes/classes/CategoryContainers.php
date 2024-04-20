@@ -13,7 +13,7 @@ class CategoryContainers {
      */
     private $username;
 
-    public function __construct($con, string $username) {
+    public function __construct(PDO $con, string $username) {
         $this->con = $con;
         $this->username = $username;
     }
@@ -65,7 +65,7 @@ class CategoryContainers {
 
         $entitiesHTML = "";
         $previewProvider = new PreviewProvider($this->con, $this->username);
-        
+
         foreach ($entities as $entity) {
             $entitiesHTML .= 
                 $previewProvider->createEntityPreviewSquare($entity);
