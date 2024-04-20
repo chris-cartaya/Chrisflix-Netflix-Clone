@@ -75,15 +75,15 @@ class Video {
         return $this->sqlData["episode"];
     }
 
-    // public function incrementViews() {
-    //     $sql = "UPDATE videos
-    //             SET views = views + 1
-    //             WHERE id = :id";
+    public function incrementViews() {
+        $sql = "UPDATE videos
+                SET views = views + 1
+                WHERE id = :id";
         
-    //     $stmt = $this->con->prepare($sql);
-    //     $stmt->bindValue(":id", $this->getId(), PDO::PARAM_INT);
-    //     $stmt->execute();
-    // }
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(":id", $this->getId(), PDO::PARAM_INT);
+        $stmt->execute();
+    }
     
 }
 ?>
