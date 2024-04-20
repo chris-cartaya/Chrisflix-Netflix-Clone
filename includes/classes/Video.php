@@ -28,17 +28,17 @@ class Video {
      * provided, it represents the entity ID to fetch data from the database.
      * 
      * @param PDO $con The PDO object representing the database connection.
-     * @param array|int $input An array of data to create entity or an integer 
-     * ID to fetch entity.
+     * @param array|string $input An array of data to create entity or a
+     * string integer ID to fetch entity.
      */
-    public function __construct(PDO $con, array|int $input) {
+    public function __construct(PDO $con, array|string $input) {
         $this->con = $con;
 
         if (is_array($input)) {
             $this->sqlData = $input;
         } else {
             $sql = "SELECT * 
-                    FROM entities 
+                    FROM videos 
                     WHERE id = :id";
         
             $stmt = $this->con->prepare($sql);
@@ -74,6 +74,16 @@ class Video {
     public function getEpisodeNumber() {
         return $this->sqlData["episode"];
     }
+
+    // public function incrementViews() {
+    //     $sql = "UPDATE videos
+    //             SET views = views + 1
+    //             WHERE id = :id";
+        
+    //     $stmt = $this->con->prepare($sql);
+    //     $stmt->bindValue(":id", $this->getId(), PDO::PARAM_INT);
+    //     $stmt->execute();
+    // }
     
 }
 ?>
