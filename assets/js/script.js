@@ -36,7 +36,8 @@ function startHideTimer() {
 // Takes in videoID and the user logged in to keep track of video progress
 function initVideo(videoID, username) {
   startHideTimer();
-  updateProgressTimer(videoID, username);  
+  updateProgressTimer(videoID, username);
+  setStartTime(videoID, username);
 }
 
 function updateProgressTimer(videoID, username) {
@@ -100,6 +101,30 @@ function setFinished(videoID, username) {
       if (data !== null && data !== "") {
         alert(data);
       }
+    }
+  );
+}
+
+// Gets progress time from database of where user left off in the video and 
+// resume video from that time
+function setStartTime(videoID, username) {
+  $.post("ajax/getProgress.php", 
+    { 
+      videoID: videoID, 
+      username: username
+    }, 
+    function(data) {
+      if (isNaN(data)) {
+        alert(data);
+        return;
+      }
+
+      // When the video can play, set video current time to data from database
+      $("video").on("canplay", function() {
+        this.currentTime = data;
+        $("video").off("canplay");
+      });
+
     }
   );
 }
