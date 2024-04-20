@@ -9,6 +9,15 @@ $video = new Video($con, $_GET["id"]);
 $video->incrementViews();
 ?>
 <div class="watchContainer">
+
+    <div class="videoControls watchNav">
+        <button>
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <h1><?= $video->getTitle(); ?></h1>
+    </div>
+
     <video controls autoplay>
         <source src="<?= $video->getFilePath(); ?>" type="video/mp4">
     </video>
