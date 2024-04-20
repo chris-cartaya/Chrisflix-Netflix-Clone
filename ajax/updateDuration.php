@@ -13,7 +13,7 @@ if (isset($_POST["username"]) &&
     $sql = "UPDATE video_progress
             SET progress = :progress, 
                 dateModified = NOW()
-            WHERE username = :username AND videoId = :videoID";
+            WHERE username = :username AND videoID = :videoID";
 
     $stmt = $con->prepare($sql);
     $stmt->bindValue(":username", $username, PDO::PARAM_STR);
