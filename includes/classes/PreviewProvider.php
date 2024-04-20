@@ -18,7 +18,7 @@ class PreviewProvider {
         $this->username = $username;
     }
 
-    public function createPreviewVideo($entity) {
+    public function createPreviewVideo(?Entity $entity) {
         if ($entity == null) {
             $entity = $this->getRandomEntity();
         }
