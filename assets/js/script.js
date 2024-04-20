@@ -33,8 +33,18 @@ function startHideTimer() {
 }
 
 // Initializes the video. Does any set up we want to do when the page loads.
-function initVideo(videoID, userLoggedIn) {
+// Takes in videoID and the user logged in to keep track of video progress
+function initVideo(videoID, username) {
   startHideTimer();
-  console.log(videoID);
-  console.log(userLoggedIn);
+  updateProgressTimer(videoID, username);  
+}
+
+function updateProgressTimer(videoID, username) {
+  addDuration(videoID, username);
+}
+
+function addDuration() {
+  $.post("ajax/addDuration.php", function(data) {
+    alert(data);
+  });
 }
