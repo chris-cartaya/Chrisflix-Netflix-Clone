@@ -62,7 +62,7 @@ class SeasonProvider {
                              alt='Video thumbnail of $videoTitle'>
                         
                         <div class='videoInfo'>
-                            <h4>$videoTitle</h4>
+                            <h4>$episodeNumber. $videoTitle</h4>
                             <span>$description</span>
                         </div>
 
