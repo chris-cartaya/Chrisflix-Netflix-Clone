@@ -50,7 +50,9 @@ function addDuration(videoID, username) {
       username: username
     }, 
     function(data) {
-      alert(data);
+      if (data !== null && data !== "") {
+        alert(data);
+      }
     }
   );
 }
