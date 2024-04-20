@@ -52,6 +52,7 @@ function updateProgressTimer(videoID, username) {
     }, 3000);
   })
   .on("ended", function() {
+    setFinished(videoID, username);
     window.clearInterval(timer);
   })
 }
@@ -78,6 +79,22 @@ function updateProgress(videoID, username, progress) {
       videoID: videoID, 
       username: username,
       progress: progress
+    }, 
+    function(data) {
+      if (data !== null && data !== "") {
+        alert(data);
+      }
+    }
+  );
+}
+
+// When video is finished playing, makes AJAX request to update finished to 1 
+// (true) in progress table in database
+function setFinished(videoID, username) {
+  $.post("ajax/setFinished.php", 
+    { 
+      videoID: videoID, 
+      username: username
     }, 
     function(data) {
       if (data !== null && data !== "") {
