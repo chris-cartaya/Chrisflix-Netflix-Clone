@@ -9,5 +9,5 @@ $preview = new PreviewProvider($con, $userLoggedIn);
 echo $preview->createCategoryPreviewVideo($_GET["id"]);
 
 $categories = new CategoryContainers($con, $userLoggedIn);
-// echo $categories->showMovieCategories();
+echo $categories->showCategory($_GET["id"]);
 ?>
