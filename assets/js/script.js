@@ -135,3 +135,8 @@ function restartVideo() {
   $("video")[0].play();
   $(".upNext").fadeOut();
 }
+
+// Plays the video which is passed into the function
+function watchVideo(videoID) {
+  window.location.href = `watch.php?id=${videoID}`;
+}
