@@ -5,5 +5,5 @@ $preview = new PreviewProvider($con, $userLoggedIn);
 echo $preview->createMoviesPreviewVideo();
 
 $categories = new CategoryContainers($con, $userLoggedIn);
-// echo $categories->showMoviesCategories();
+echo $categories->showMovieCategories();
 ?>

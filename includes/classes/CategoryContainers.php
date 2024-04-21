@@ -51,6 +51,23 @@ class CategoryContainers {
     }
 
 
+    public function showMovieCategories(): string {
+
+        $stmt = $this->con->prepare("SELECT * FROM categories");
+        $stmt->execute();
+
+        $html = "<div class='previewCategories'>
+                    <h1>Movies</h1>";
+
+        // $row will continue iterating for each row from the query.
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $html .= $this->getCategoryHTML($row, null, false, true);
+        }
+
+        return $html . "</div>";
+    }
+
+
     // Shows all entities that below to a certain category
     public function showCategory(int $categoryId, ?string $title = null) {
         
@@ -98,7 +115,9 @@ class CategoryContainers {
             );
         } 
         else {
-            // Get movie entities
+            $entities = EntityProvider::getMovieEntities(
+                $this->con, $categoryId, 30
+            );
         }
 
         if (sizeof($entities) == 0) {

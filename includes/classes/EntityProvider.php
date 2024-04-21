@@ -63,7 +63,7 @@ class EntityProvider {
     }
 
 
-    public static function getMoviesEntities(
+    public static function getMovieEntities(
         PDO $con, ?int $categoryId, int $limit
     ) {
         

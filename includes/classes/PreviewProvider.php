@@ -31,7 +31,7 @@ class PreviewProvider {
 
 
     public function createMoviesPreviewVideo() {
-        $entitiesArr = EntityProvider::getMoviesEntities($this->con, null, 1);
+        $entitiesArr = EntityProvider::getMovieEntities($this->con, null, 1);
 
         if (sizeof($entitiesArr) == 0) {
             ErrorMessage::show("No movies to display");
