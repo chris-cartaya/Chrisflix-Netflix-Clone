@@ -16,7 +16,7 @@ class VideoProvider {
         //      get the next season
         $sql = "SELECT *
                 FROM videos
-                WHERE entityId = :entityId AND videoId != :videoId
+                WHERE entityId = :entityId AND id != :videoId
                 AND (
                     (season = :season AND episode > :episode) OR 
                     season > :season
