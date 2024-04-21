@@ -19,6 +19,17 @@ class PreviewProvider {
     }
 
 
+    public function createCategoryPreviewVideo($categoryId) {
+        $entitiesArr = EntityProvider::getEntities($this->con, $categoryId, 1);
+
+        if (sizeof($entitiesArr) == 0) {
+            ErrorMessage::show("No videos in category to display");
+        }
+
+        return $this->createPreviewVideo($entitiesArr[0]);
+    }
+
+
     public function createTVShowPreviewVideo() {
         $entitiesArr = EntityProvider::getTVShowEntities($this->con, null, 1);
 
