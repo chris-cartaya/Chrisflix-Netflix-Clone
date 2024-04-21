@@ -52,5 +52,42 @@ class VideoProvider {
         return new Video($con, $row);
     }
 
+
+    // Returns video that the user wants to see
+    public static function getEntityVideoForUser(
+        PDO $con, $entityId, string $username
+    ) {
+
+        $sql = "SELECT videoID 
+                FROM video_progress
+                INNER JOIN videos
+                ON video_progress.videoID = videos.id
+                WHERE videos.entityId = :entityId 
+                    AND video_progress.username = :username
+                ORDER BY video_progress.dateModified DESC
+                LIMIT 1";
+
+        $stmt = $con->prepare($sql);
+        $stmt->bindValue(":entityId", $entityId, PDO::PARAM_INT);
+        $stmt->bindValue(":username", $username, PDO::PARAM_STR);
+        $stmt->execute();
+
+        // If user has never seen show before, 
+        // start them at lowest episode in the lowest season
+        if ($stmt->rowCount() == 0) {
+            $sql = "SELECT id
+                    FROM videos
+                    WHERE entityId = :entityId
+                    ORDER BY season, episode ASC
+                    LIMIT 1";
+
+            $stmt = $con->prepare($sql);
+            $stmt->bindValue(":entityId", $entityId, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        return $stmt->fetchColumn();
+    }
+
 }
 ?>
