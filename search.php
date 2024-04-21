@@ -19,7 +19,19 @@ require_once("includes/header.php");
 
             timer = setTimeout(function() {
                 let val = $(".searchInput").val();
-                console.log(val);
+                
+                if (val != "") {
+                    $.post("ajax/getSearchResults.php",
+                    {
+                        term: val,
+                        username: username
+                    },
+                    function(data) {
+                        $(".results").html(data);
+                    })
+                } else {
+                    $(".results").html(""); // Clear results
+                }
             }, 500);
         })
 
