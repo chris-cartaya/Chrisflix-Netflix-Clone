@@ -7,6 +7,8 @@
   --border-color: #dedede;
   --btn-bg-color: #4285f4;
 
+  --check-icon-color: #2ecc71;
+
   --white-text-color: #fff;
   --netflix-off-white-text-color: #e5e5e5;
   --std-black-text-color: #000;
@@ -254,6 +256,7 @@ button i {
   display: flex;
   flex-direction: column;
   width: 230px;
+  position: relative;
 }
 
 .episodeContainer img {
@@ -338,4 +341,15 @@ button i {
 
 .upNext .replayBtn {
   margin-right: 15px;
+}
+
+
+/* Check icon for watched videos */
+
+.seen {
+  color: var(--check-icon-color);
+  font-size: 26px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }

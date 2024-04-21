@@ -125,6 +125,22 @@ class Video {
 
         return $stmt->rowCount() != 0;
     }
+
+    // Returns true is user has finished watching the video; false otherwise.
+    public function hasSeen(string $username): bool {
+        $sql = "SELECT *
+                FROM video_progress
+                WHERE username = :username 
+                    AND videoID = :videoID
+                    AND finished = 1";
+        
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(":username", $username, PDO::PARAM_STR);
+        $stmt->bindValue(":videoID", $this->getId(), PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->rowCount() != 0;
+    }
     
 }
 ?>
