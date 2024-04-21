@@ -18,7 +18,13 @@ class PreviewProvider {
         $this->username = $username;
     }
 
-    public function createPreviewVideo(?Entity $entity) {
+
+    public function createTVShowPreviewVideo() {
+        // FINISH with entity class
+    }
+
+
+    public function createPreviewVideo(?Entity $entity): string {
         if ($entity == null) {
             $entity = $this->getRandomEntity();
         }
@@ -79,7 +85,6 @@ class PreviewProvider {
                 </div>
 
             </div>";
-
     }
 
     public function createEntityPreviewSquare($entity) {
