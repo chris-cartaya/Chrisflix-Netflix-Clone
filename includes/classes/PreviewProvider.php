@@ -34,6 +34,9 @@ class PreviewProvider {
 
         $video = new Video($this->con, $videoID);
 
+        $inProgress = $video->isInProgress($this->username);
+        $playButtonText = $inProgress ? "Continue watching" : "Play";
+
         $seasonEpisode = $video->getSeasonAndEpisode();
         $subHeading = $video->isMovie() ? "" : "<h4>$seasonEpisode</h4>";
 
@@ -63,7 +66,7 @@ class PreviewProvider {
                         $subHeading
                         <div class='buttons'>
                             <button onclick='watchVideo($videoID)'>
-                                <i class='fa-solid fa-play'></i> Play
+                                <i class='fa-solid fa-play'></i> $playButtonText
                             </button>
 
                             <button onclick='volumeToggle(this)'>

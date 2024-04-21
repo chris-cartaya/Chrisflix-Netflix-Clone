@@ -106,6 +106,25 @@ class Video {
     public function isMovie(): bool {
         return $this->sqlData["isMovie"] == 1;
     }
+
+    // If user has started watching the video, then there will be a row in the 
+    // video_progress table in the database with that username and videoID. 
+    // If a row is returned, then the user has started watching that video 
+    // already, so it IS in progress, and function returns true. 
+    // If the query returns no rows, then the user has not started watching 
+    // that video, so it is NOT in progress, and function returns false .
+    public function isInProgress(string $username): bool {
+        $sql = "SELECT *
+                FROM video_progress
+                WHERE username = :username AND videoID = :videoID";
+        
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(":username", $username, PDO::PARAM_STR);
+        $stmt->bindValue(":videoID", $this->getId(), PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->rowCount() != 0;
+    }
     
 }
 ?>
