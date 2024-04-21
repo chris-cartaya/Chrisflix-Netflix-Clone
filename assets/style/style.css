@@ -329,3 +329,7 @@ button i {
 .watchNav {
   z-index: 2;
 }
+
+.upNext .replayBtn {
+  margin-right: 15px;
+}
