@@ -408,8 +408,26 @@ button i {
 }
 
 
-/* TV Show page */
+/* TV Show, Movie, Category page */
 
 .previewCategories h1 {
   color: var(--netflix-off-white-text-color);
+}
+
+
+/* Search page */
+
+.textBoxContainer {
+  padding: 100px 50px;
+}
+
+.searchInput {
+  height: 50px;
+  width: 600px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--white-text-color);
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 3px;
 }
