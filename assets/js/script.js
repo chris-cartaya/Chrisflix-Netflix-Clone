@@ -140,3 +140,8 @@ function restartVideo() {
 function watchVideo(videoID) {
   window.location.href = `watch.php?id=${videoID}`;
 }
+
+// Displays the upNext overlay when video is over
+function showUpNext() {
+  $(".upNext").fadeIn();
+}
