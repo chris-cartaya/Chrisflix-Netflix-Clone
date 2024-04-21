@@ -1,3 +1,11 @@
+// If the top of the page is greater than the topBar element, then it is true;
+// otherwise false.
+// If true, will add class 'scrolled' to .topBar; if false, it won't.
+$(document).scroll(function() {
+  let isScrolled = $(this).scrollTop() > $(".topBar").height();
+  $(".topBar").toggleClass("scrolled", isScrolled);
+});
+
 function volumeToggle(button) {
   const muted = $(".previewVideo").prop("muted");
   $(".previewVideo").prop("muted", !muted);
