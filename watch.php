@@ -28,6 +28,7 @@ $upNextVideo = VideoProvider::getUpNext($con, $video);
         <div class="upNextContainer">
             <h2>Up next:</h2>
             <h3><?= $upNextVideo->getTitle(); ?></h3>
+            <h3><?= $upNextVideo->getSeasonAndEpisode(); ?></h3>
         </div>
 
     </div>

@@ -92,6 +92,20 @@ class Video {
         $stmt->bindValue(":id", $this->getId(), PDO::PARAM_INT);
         $stmt->execute();
     }
+
+    public function getSeasonAndEpisode() {
+        if ($this->isMovie()) {
+            return;
+        }
+        $season = $this->getSeasonNumber();
+        $episode = $this->getEpisodeNumber();
+
+        return "Season $season, Episode $episode";
+    }
+
+    public function isMovie(): bool {
+        return $this->sqlData["isMovie"] == 1;
+    }
     
 }
 ?>
