@@ -20,7 +20,13 @@ class PreviewProvider {
 
 
     public function createTVShowPreviewVideo() {
-        // FINISH with entity class
+        $entitiesArr = EntityProvider::getTVShowEntities($this->con, null, 1);
+
+        if (sizeof($entitiesArr) == 0) {
+            ErrorMessage::show("No TV shows to display");
+        }
+
+        return $this->createPreviewVideo($entitiesArr[0]);
     }
 
 
