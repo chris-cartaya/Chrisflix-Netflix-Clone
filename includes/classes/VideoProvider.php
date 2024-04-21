@@ -33,6 +33,23 @@ class VideoProvider {
         
         $stmt->execute();
 
+        // If there are no more episodes to watch, 
+        // select a random season 1 episode 1 show or selects a movie (season=0)
+        if ($stmt->rowCount() == 0) {
+            $sql = "SELECT * 
+                    FROM videos
+                    WHERE season <= 1 AND episode <= 1 AND id != :videoId
+                    ORDER BY views DESC
+                    LIMIT 1";
+
+            $stmt = $con->prepare($sql);
+            $stmt->bindValue(":videoId", $videoId , PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return new Video($con, $row);
     }
 
 }
