@@ -406,3 +406,10 @@ button i {
   font-size: 20px;
   margin-left: 10px;
 }
+
+
+/* TV Show page */
+
+.previewCategories h1 {
+  color: var(--netflix-off-white-text-color);
+}

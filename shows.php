@@ -5,5 +5,5 @@ $preview = new PreviewProvider($con, $userLoggedIn);
 echo $preview->createTVShowPreviewVideo();
 
 $categories = new CategoryContainers($con, $userLoggedIn);
-echo $categories->showAllCategories();
+echo $categories->showTVShowCategories();
 ?>
