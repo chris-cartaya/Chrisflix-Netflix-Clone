@@ -68,7 +68,7 @@ class CategoryContainers {
     }
 
 
-    // Shows all entities that below to a certain category
+    // Shows all entities that belong to a certain category
     public function showCategory(int $categoryId, ?string $title = null) {
         
         $sql = "SELECT * 
