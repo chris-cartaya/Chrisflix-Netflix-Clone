@@ -23,12 +23,16 @@ class PreviewProvider {
             $entity = $this->getRandomEntity();
         }
 
-        $id = $entity->getId();
+        $entityId = $entity->getId();
         $entityName = $entity->getName();
         $thumbnail = $entity->getThumbnail();
         $preview = $entity->getPreview();
 
         // TODO: ADD SUBTITLE
+
+        $videoID = VideoProvider::getEntityVideoForUser(
+            $this->con, $entityId, $this->username
+        );
 
         return 
             "<div class='previewContainer'>
@@ -55,7 +59,7 @@ class PreviewProvider {
                         <h1>$entityName</h1>
 
                         <div class='buttons'>
-                            <button>
+                            <button onclick='watchVideo($videoID)'>
                                 <i class='fa-solid fa-play'></i> Play
                             </button>
 
@@ -73,12 +77,12 @@ class PreviewProvider {
     }
 
     public function createEntityPreviewSquare($entity) {
-        $id = $entity->getId();
+        $entityId = $entity->getId();
         $entityName = $entity->getName();
         $thumbnail = $entity->getThumbnail();
 
         return 
-            "<a href='entity.php?id=$id'>
+            "<a href='entity.php?id=$entityId'>
                 <div class='previewContainer small'>
                     <img 
                         src='$thumbnail' 
