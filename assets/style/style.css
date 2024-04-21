@@ -275,6 +275,10 @@ button i {
 
 /* watch Video page */
 
+.watchContainer {
+  position: relative;
+}
+
 .watchContainer video {
   width: 100%;
 }
@@ -303,4 +307,25 @@ button i {
 
 .videoControls button i:hover {
   color: #e6e6e6;
+}
+
+
+/* Up Next video styles */
+
+.upNext {
+  height: 100%;
+  justify-content: center;
+}
+
+.upNextContainer button {
+  padding: 0;
+}
+
+.upNextContainer h2,
+.upNextContainer h3 {
+  color: var(--white-text-color);
+}
+
+.watchNav {
+  z-index: 2;
 }

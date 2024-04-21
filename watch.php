@@ -21,7 +21,8 @@ $upNextVideo = VideoProvider::getUpNext($con, $video);
     </div>
 
     <div class="videoControls upNext">
-        <button>
+
+        <button class="replayBtn">
             <i class="fa-solid fa-arrow-rotate-right"></i>
         </button>
 
