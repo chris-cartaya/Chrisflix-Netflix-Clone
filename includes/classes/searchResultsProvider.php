@@ -13,13 +13,15 @@ class searchResultsProvider {
      */
     private string $username;
 
+    
     public function __construct(PDO $con, string $username) {
         $this->con = $con;
         $this->username = $username;
     }
 
-    public function getResults($searchText) {
 
+    public function getResults(string $searchText) {
+        $entities = EntityProvider::getSearchEntities($this->con, $searchText);
     }
 
 }

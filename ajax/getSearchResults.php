@@ -1,10 +1,11 @@
 <?php
 require_once("../includes/config.php");
 require_once("../includes/classes/SearchResultsProvider.php");
+require_once("../includes/classes/EntityProvider.php");
+require_once("../includes/classes/Entity.php");
 
 if (isset($_POST["term"]) && isset($_POST["username"])) {
 
-    // get search results
     $username = $_POST["username"];
     $searchTerm = $_POST["term"];
 
