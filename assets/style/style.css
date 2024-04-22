@@ -14,6 +14,8 @@
   --netflix-off-white-text-color: #e5e5e5;
   --std-black-text-color: #000;
   --secondary-black-text-color: #333;
+
+  --success-text-color: #2ecc71;
   --error-text-color: #f00;
 
   --min-view-width: 1050px
@@ -473,4 +475,17 @@ button i {
   background-color: var(--save-profile-btn-bg-color);
   width: 100px;
   height: 40px;
+}
+
+.alertSuccess,
+.alertError {
+  margin: 10px 0;
+}
+
+.alertSuccess {
+  color: var(--success-text-color);
+}
+
+.alertError {
+  color: var(--error-text-color);
 }

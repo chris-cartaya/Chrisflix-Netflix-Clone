@@ -309,5 +309,12 @@ class Account {
         }
     }
 
+    // Return the first error in the error array.
+    public function getFirstError() {
+        if (!empty($this->errorArr)) {
+            return $this->errorArr[0];
+        }
+    }
+
 }
 ?>
