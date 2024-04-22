@@ -1,5 +1,5 @@
 <?php
-class searchResultsProvider {
+class SearchResultsProvider {
 
     /**
      * Connection to the database
