@@ -7,11 +7,28 @@ require_once("includes/header.php");
         <form method="POST">
             <h2>User details</h2>
 
-            <input type="text" name="firstName" placeholder="First name">
+            <?php
+            $user = new User($con, $userLoggedIn);
 
-            <input type="text" name="lastName" placeholder="Last name">
+            $firstName = $_POST["firstName"] ?? $user->getFirstName();
+            $lastName = $_POST["lastName"] ?? $user->getLastName();
+            $email = $_POST["email"] ?? $user->getEmail();
+            ?>
 
-            <input type="email" name="email" placeholder="Email">
+            <input 
+                type="text" name="firstName" placeholder="First name"
+                value="<?= $firstName; ?>"
+            >
+
+            <input 
+                type="text" name="lastName" placeholder="Last name"
+                value="<?= $lastName; ?>"
+            >
+
+            <input 
+                type="email" name="email" placeholder="Email"
+                value="<?= $email; ?>"
+            >
 
             <input type="submit" name="saveDetailsButton" value="Save">
         </form>
