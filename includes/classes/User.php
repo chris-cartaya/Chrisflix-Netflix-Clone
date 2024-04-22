@@ -37,12 +37,33 @@ class User {
         return $this->sqlData["lastName"];
     }
 
+    public function getUsername(): string {
+        return $this->sqlData["username"];
+    }
+
     public function getEmail(): string {
         return $this->sqlData["email"];
     }
 
     public function getIsSubscribed(): string {
         return $this->sqlData["isSubscribed"];
+    }
+
+    public function setIsSubscribed($value) {
+        $sql = "UPDATE users
+                SET isSubscribed = :isSubscribed
+                WHERE username = :username";
+        
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(":isSubscribed", $value);
+        $stmt->bindValue(":username", $this->getUsername());
+        
+        if ($stmt->execute()) {
+            $this->sqlData["isSubscribed"] = $value;
+            return true;
+        }
+
+        return false;
     }
 
 
