@@ -4,10 +4,13 @@ require_once("includes/classes/Account.php");
 require_once("includes/classes/FormSanitizer.php");
 require_once("includes/classes/Constants.php");
 
-$detailsMessage = "";
+$account = new Account($con);
 
+$detailsMessage = "";
+$passwordMessage = "";
+
+// For updating user details
 if (isset($_POST["saveDetailsButton"])) {
-    $account = new Account($con);
 
     $firstName = FormSanitizer::sanitizeFormString($_POST["firstName"]);
     $lastName = FormSanitizer::sanitizeFormString($_POST["lastName"]);
@@ -30,6 +33,32 @@ if (isset($_POST["saveDetailsButton"])) {
             </div>";
     }
 }
+
+// For updating password
+if (isset($_POST["savePasswordButton"])) {
+
+    $oldPassword = FormSanitizer::sanitizeFormPassword($_POST["oldPassword"]);
+    $newPassword = FormSanitizer::sanitizeFormPassword($_POST["newPassword"]);
+    $newPassword2 = FormSanitizer::sanitizeFormPassword($_POST["newPassword2"]);
+
+    // if ($account->updatePassword($firstName, $lastName, $email, $userLoggedIn)) {
+
+    //     $passwordMessage = 
+    //         "<div class='alertSuccess'>
+    //             Password updated successfully!
+    //         </div>";
+
+    // } else {
+
+    //     $errorMessage = $account->getFirstError();
+
+    //     $passwordMessage = 
+    //         "<div class='alertError'>
+    //             $errorMessage
+    //         </div>";
+    // }
+}
+
 ?>
 <div class="settingsContainer column">
 
@@ -80,6 +109,10 @@ if (isset($_POST["saveDetailsButton"])) {
 
             <input type="password" name="newPassword2" 
                    placeholder="Confirm new password">
+            
+            <div class="message">
+                <?= $passwordMessage; ?>
+            </div>
 
             <input type="submit" name="savePasswordButton" value="Save">
         </form>
