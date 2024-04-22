@@ -34,5 +34,7 @@ class Constants {
         self::PASSWORD_MAX_CHARS . " characters";
     
     public static $loginFailed = "Your username or password was incorrect";
+
+    public static $passwordIncorrect = "Your old password is incorrect";
 }
 ?>

@@ -41,22 +41,23 @@ if (isset($_POST["savePasswordButton"])) {
     $newPassword = FormSanitizer::sanitizeFormPassword($_POST["newPassword"]);
     $newPassword2 = FormSanitizer::sanitizeFormPassword($_POST["newPassword2"]);
 
-    // if ($account->updatePassword($firstName, $lastName, $email, $userLoggedIn)) {
+    if ($account->updatePassword($oldPassword, $newPassword, 
+                                 $newPassword2, $userLoggedIn)
+    ) {
+        $passwordMessage = 
+            "<div class='alertSuccess'>
+                Password updated successfully!
+            </div>";
 
-    //     $passwordMessage = 
-    //         "<div class='alertSuccess'>
-    //             Password updated successfully!
-    //         </div>";
+    } else {
 
-    // } else {
+        $errorMessage = $account->getFirstError();
 
-    //     $errorMessage = $account->getFirstError();
-
-    //     $passwordMessage = 
-    //         "<div class='alertError'>
-    //             $errorMessage
-    //         </div>";
-    // }
+        $passwordMessage = 
+            "<div class='alertError'>
+                $errorMessage
+            </div>";
+    }
 }
 
 ?>

@@ -149,6 +149,53 @@ class Account {
     }
 
 
+    // Returns true if successfully updated password; false otherwise
+    public function updatePassword(
+        string $oldPassword, string $newPassword, 
+        string $newPassword2, string $username
+    ): bool {
+        $this->validateOldPassword($oldPassword, $username);
+        $this->validatePasswords($newPassword, $newPassword2);
+
+        if (!empty($this->errorArr)) {
+            return false;
+        }
+
+        $sql = "UPDATE users
+                SET password = :password
+                WHERE username = :username";
+        
+        $stmt = $this->con->prepare($sql);
+
+        $password = hash("sha512", $newPassword);
+
+        $stmt->bindValue(":password", $password, PDO::PARAM_STR);
+        $stmt->bindValue(":username", $username, PDO::PARAM_STR);
+
+        return $stmt->execute();
+    }
+
+    
+    public function validateOldPassword(string $oldPassword, string $username) {
+        $password = hash("sha512", $oldPassword);
+
+        $sql = "SELECT *
+                FROM users
+                WHERE username = :username AND password = :password";
+        
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 0) {
+            array_push($this->errorArr, Constants::$passwordIncorrect);
+        }
+    }
+
+
     /**
      * Validates the first name of the user.
      * 
