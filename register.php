@@ -7,7 +7,6 @@ require_once("includes/classes/FormSanitizer.php");
 $account = new Account($con);
 
 if (isset($_POST["submitButton"])) {
-    echo "Form was submitted<br>";
 
     $firstName = FormSanitizer::sanitizeFormString($_POST['firstName']);
     $lastName = FormSanitizer::sanitizeFormString($_POST['lastName']);
@@ -17,19 +16,10 @@ if (isset($_POST["submitButton"])) {
     $password = FormSanitizer::sanitizeFormPassword($_POST['password']);
     $password2 = FormSanitizer::sanitizeFormPassword($_POST['password2']);
     
-    echo "firstName: "; var_dump($firstName);   echo "<br>";
-    echo "lastName: ";  var_dump($lastName);    echo "<br>";
-    echo "username: ";  var_dump($username);    echo "<br>";
-    echo "email: ";     var_dump($email);       echo "<br>";
-    echo "email2: ";    var_dump($email2);      echo "<br>";
-    echo "password: ";  var_dump($password);    echo "<br>";
-    echo "password2: "; var_dump($password2);   echo "<br>";
-
     $success = $account->register($firstName, $lastName, $username, $email, 
                                   $email2, $password, $password2);
     
     if ($success) {
-        // Store session variables --- do later.
         header("Location: index.php");
     }
 }
