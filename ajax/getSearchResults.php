@@ -9,7 +9,7 @@ if (isset($_POST["term"]) && isset($_POST["username"])) {
     $searchTerm = $_POST["term"];
 
     $searchResults = new SearchResultsProvider($con, $username);
-    echo $getResults->getResults($searchTerm);
+    echo $searchResults->getResults($searchTerm);
 
 } else {
     echo "No term or username passed into file";

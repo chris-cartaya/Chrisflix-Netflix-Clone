@@ -11,7 +11,7 @@ class searchResultsProvider {
      * The user logged in
      * @var string username
      */
-    private $username;
+    private string $username;
 
     public function __construct(PDO $con, string $username) {
         $this->con = $con;
