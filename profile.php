@@ -60,6 +60,28 @@ if (isset($_POST["savePasswordButton"])) {
             </div>";
     }
 }
+
+// Check if the delete button is clicked
+if (isset($_POST["deleteAccountButton"])) {
+
+    $sql = "DELETE FROM users 
+            WHERE username = :username";
+            
+    $stmt = $con->prepare($sql);
+    $stmt->bindValue(':username', $userLoggedIn, PDO::PARAM_STR);
+    
+    if ($stmt->execute()) {
+
+        header("Location: logout.php");
+        exit();
+
+    } else {
+        
+        $errorMessage = "Error deleting user. Please try again.";
+
+    }
+}
+
 ?>
 <div class="settingsContainer column">
 
@@ -95,6 +117,29 @@ if (isset($_POST["savePasswordButton"])) {
             <input type="submit" name="saveDetailsButton" value="Save">
         </form>
     </div>
+
+
+    <div class="formSection">
+        <form method="POST">
+            <h2>Delete Account</h2>
+
+            <h3 style="color:red; font-weight:bold;">
+                Warning: This action cannot be undone. 
+                All your data will be lost.
+            </h3>
+
+            <input type="submit" name="deleteAccountButton" 
+                    value="Delete" class="deleteButton"
+                    onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+
+            <?php 
+            if(isset($errorMessage)) {
+                echo "<span class='errorMessage'>$errorMessage</span>"; 
+            }
+            ?>
+        </form>
+    </div>
+
 
     <div class="formSection">
         <form method="POST">
