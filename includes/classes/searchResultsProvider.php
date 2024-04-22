@@ -13,7 +13,7 @@ class searchResultsProvider {
      */
     private string $username;
 
-    
+
     public function __construct(PDO $con, string $username) {
         $this->con = $con;
         $this->username = $username;
@@ -22,6 +22,34 @@ class searchResultsProvider {
 
     public function getResults(string $searchText) {
         $entities = EntityProvider::getSearchEntities($this->con, $searchText);
+
+        $html = "<div class='previewCategories noScroll'>";
+        
+        $html .= $this->getResultHTML($entities);
+
+        return $html . "</div>";
+    }
+
+
+    private function getResultHTML(array $entities) {
+        if (sizeof($entities) == 0) {
+            return;
+        }
+
+        $entitiesHTML = "";
+        $previewProvider = new PreviewProvider($this->con, $this->username);
+
+        foreach ($entities as $entity) {
+            $entitiesHTML .= 
+                $previewProvider->createEntityPreviewSquare($entity);
+        }
+
+        return 
+            "<div class='category'>
+                <div class='entities'>
+                    $entitiesHTML;
+                </div>
+            </div>";
     }
 
 }
