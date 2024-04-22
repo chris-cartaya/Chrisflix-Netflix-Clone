@@ -130,12 +130,22 @@ class Account {
         $this->validateLastName($lastName);
         $this->validateNewEmail($email, $username);
 
-        if (empty($this->errorArr)) {
-            // update data
-            return true;
+        if (!empty($this->errorArr)) {
+            return false;
         }
 
-        return false;
+        $sql = "UPDATE users
+                SET firstName = :firstName, lastName = :lastName, email = :email
+                WHERE username = :username";
+        
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->bindValue(":firstName", $firstName, PDO::PARAM_STR);
+        $stmt->bindValue(":lastName", $lastName, PDO::PARAM_STR);
+        $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+        $stmt->bindValue(":username", $username, PDO::PARAM_STR);
+
+        return $stmt->execute();
     }
 
 
