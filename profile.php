@@ -60,7 +60,6 @@ if (isset($_POST["savePasswordButton"])) {
             </div>";
     }
 }
-
 ?>
 <div class="settingsContainer column">
 
@@ -123,9 +122,10 @@ if (isset($_POST["savePasswordButton"])) {
 
         <?php
             if ($user->getIsSubscribed()) {
-                echo "<h3>You are subscribed! Go to PayPal to cancel.</h3>";
+                echo "<h3>You are subscribed!</h3>
+                      <a href='cancel.php'>Cancel subscription</a>";
             } else {
-                echo "<a href='billing.php'>Subscribe to Chrisflix</a>";
+                echo "<a href='subscribe.php'>Subscribe to Chrisflix</a>";
             }
         ?>
 
