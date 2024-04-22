@@ -14,7 +14,7 @@ class Entity {
      * Data array representing entity attributes or the entity ID.
      * @var array sqlData
      */
-    private $sqlData;
+    private array $sqlData;
 
     /**
      * Entity constructor.
