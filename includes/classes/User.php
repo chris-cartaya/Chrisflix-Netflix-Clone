@@ -42,8 +42,7 @@ class User {
     }
 
     public function getIsSubscribed(): string {
-        // return $this->sqlData["isSubscribed"];
-        return true;
+        return $this->sqlData["isSubscribed"];
     }
 
 
