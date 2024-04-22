@@ -48,13 +48,13 @@ class Account {
         $this->validateEmails($email, $email2);
         $this->validatePasswords($password, $password2);
 
-        if (empty($this->errorArr)) {
-            return $this->insertUserDetails(
-                $firstName, $lastName, $username, $email, $password
-            );
+        if (!empty($this->errorArr)) {
+            return false;
         }
 
-        return false;
+        return $this->insertUserDetails(
+            $firstName, $lastName, $username, $email, $password
+        );
     }
 
     /**
