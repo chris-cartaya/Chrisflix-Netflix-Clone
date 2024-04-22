@@ -122,12 +122,20 @@ class Account {
     }
 
 
+    // Returns true if successfully updated user details; false otherwise
     public function updateDetails(
         string $firstName, string $lastName, string $email, string $username
-    ) {
+    ): bool {
         $this->validateFirstName($firstName);
         $this->validateLastName($lastName);
         $this->validateNewEmail($email, $username);
+
+        if (empty($this->errorArr)) {
+            // update data
+            return true;
+        }
+
+        return false;
     }
 
 
