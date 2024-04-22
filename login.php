@@ -7,13 +7,8 @@ require_once("includes/classes/FormSanitizer.php");
 $account = new Account($con);
 
 if (isset($_POST["submitButton"])) {
-    echo "Form was submitted<br>";
-
     $username = FormSanitizer::sanitizeFormUsername($_POST['username']);
     $password = FormSanitizer::sanitizeFormPassword($_POST['password']);
-    
-    echo "username: ";  var_dump($username);    echo "<br>";
-    echo "password: ";  var_dump($password);    echo "<br>";
 
     $success = $account->login($username, $password);
     
