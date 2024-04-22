@@ -123,13 +123,9 @@ if (isset($_POST["savePasswordButton"])) {
 
         <?php
             if ($user->getIsSubscribed()) {
-
                 echo "<h3>You are subscribed! Go to PayPal to cancel.</h3>";
-
             } else {
-
                 echo "<a href='billing.php'>Subscribe to Chrisflix</a>";
-
             }
         ?>
 
