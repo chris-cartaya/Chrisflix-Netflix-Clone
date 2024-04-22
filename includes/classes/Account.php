@@ -21,7 +21,7 @@ class Account {
      * 
      * @param PDO $con The PDO object representing the database connection.
      */
-    public function __construct($con) {
+    public function __construct(PDO $con) {
         $this->con = $con;
     }
 
@@ -121,6 +121,16 @@ class Account {
 
     }
 
+
+    public function updateDetails(
+        string $firstName, string $lastName, string $email, string $username
+    ) {
+        $this->validateFirstName($firstName);
+        $this->validateLastName($lastName);
+        $this->validateNewEmail($email, $username);
+    }
+
+
     /**
      * Validates the first name of the user.
      * 
@@ -130,8 +140,7 @@ class Account {
      */
     private function validateFirstName(string $firstName): void {
         if (strlen($firstName) < Constants::NAME_MIN_CHARS || 
-            strlen($firstName) > Constants::NAME_MAX_CHARS) 
-        {
+            strlen($firstName) > Constants::NAME_MAX_CHARS) {
             array_push($this->errorArr, Constants::$firstNameCharacters);
         }
     }
@@ -212,6 +221,38 @@ class Account {
             array_push($this->errorArr, Constants::$emailTaken);
         }
     }
+
+
+    /**
+     * Validates the new email address of the user.
+     * Checks if any user has this same email.
+     * 
+     * @param string $email 
+     * @param string $username 
+     * 
+     * @return void
+     */
+    private function validateNewEmail(string $email, string $username): void {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) ) {
+            array_push($this->errorArr, Constants::$emailInvalid);
+            return;
+        }
+
+        $sql = "SELECT * 
+                FROM users 
+                WHERE email = :email
+                AND username != :username";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+
+        if ($stmt->rowCount() != 0) {
+            array_push($this->errorArr, Constants::$emailTaken);
+        }
+    }
+
 
     /**
      * Validates the passwords of the user.
