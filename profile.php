@@ -5,6 +5,7 @@ require_once("includes/classes/FormSanitizer.php");
 require_once("includes/classes/Constants.php");
 
 $account = new Account($con);
+$user = new User($con, $userLoggedIn);
 
 $detailsMessage = "";
 $passwordMessage = "";
@@ -68,8 +69,6 @@ if (isset($_POST["savePasswordButton"])) {
             <h2>Update User Details</h2>
 
             <?php
-            $user = new User($con, $userLoggedIn);
-
             $firstName = $_POST["firstName"] ?? $user->getFirstName();
             $lastName = $_POST["lastName"] ?? $user->getLastName();
             $email = $_POST["email"] ?? $user->getEmail();
@@ -117,6 +116,23 @@ if (isset($_POST["savePasswordButton"])) {
 
             <input type="submit" name="savePasswordButton" value="Save">
         </form>
+    </div>
+
+    <div class="formSection">
+        <h2>Subscription Information</h2>
+
+        <?php
+            if ($user->getIsSubscribed()) {
+
+                echo "<h3>You are subscribed! Go to PayPal to cancel.</h3>";
+
+            } else {
+
+                echo "<a href='billing.php'>Subscribe to Chrisflix</a>";
+
+            }
+        ?>
+
     </div>
 
 </div>

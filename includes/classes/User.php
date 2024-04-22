@@ -29,16 +29,21 @@ class User {
     }
 
     
-    public function getFirstName() {
+    public function getFirstName(): string {
         return $this->sqlData["firstName"];
     }
 
-    public function getLastName() {
+    public function getLastName(): string {
         return $this->sqlData["lastName"];
     }
 
-    public function getEmail() {
+    public function getEmail(): string {
         return $this->sqlData["email"];
+    }
+
+    public function getIsSubscribed(): string {
+        // return $this->sqlData["isSubscribed"];
+        return true;
     }
 
 
